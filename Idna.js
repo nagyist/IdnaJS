@@ -1314,10 +1314,10 @@ var Idna = function(){};
     constructor['IsHebrew'] = constructor.IsHebrew = function(ch) {
         return Idna.GetScript(ch) == 2;
     };
-    constructor['IsKanaOrHan'] = constructor.IsKanaOrHan = function(ch) {
+    constructor.IsKanaOrHan = function(ch) {
         return Idna.GetScript(ch) == 3;
     };
-    constructor['IsValidConjunct'] = constructor.IsValidConjunct = function(str, index) {
+    constructor.IsValidConjunct = function(str, index) {
 
         var found = false;
         var oldIndex = index;
@@ -1423,7 +1423,7 @@ var Idna = function(){};
         }
         return Idna.IsValidLabel(str.substring(lastIndex, (lastIndex) + (str.length - lastIndex)), lookupRules, bidiRule);
     };
-    constructor['ToLowerCaseAscii'] = constructor.ToLowerCaseAscii = function(str) {
+    constructor.ToLowerCaseAscii = function(str) {
         if (str == null) {
             return null;
         }
@@ -1451,7 +1451,7 @@ var Idna = function(){};
         }
         return builder.join("");
     };
-    constructor['IsValidLabel'] = constructor.IsValidLabel = function(str, lookupRules, bidiRule) {
+    constructor.IsValidLabel = function(str, lookupRules, bidiRule) {
         if ((str) == null || (str).length == 0) {
             return false;
         }
@@ -1494,7 +1494,7 @@ var Idna = function(){};
             return Idna.IsValidULabel(str, lookupRules, bidiRule);
         }
     };
-    constructor['IsValidULabel'] = constructor.IsValidULabel = function(str, lookupRules, bidiRule) {
+    constructor.IsValidULabel = function(str, lookupRules, bidiRule) {
         if ((str) == null || (str).length == 0) {
             return false;
         }

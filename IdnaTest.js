@@ -44,9 +44,31 @@ function codePointsToString(codepoints){
  return builder.join("")
 }
 
-// Normalization test
 
 var fs=require("fs"), sys=require("sys")
+var http=require("http"), url=require("url")
+
+function fetchIfNeeded(local,remote,callback){
+ if(fs.existsSync(local)){
+    callback();
+    return;
+ }
+ var ws=fs.FileWriteStream(local)
+ var urlinfo=url.parse(remote)
+ var op={host:urlinfo.host,path:urlinfo.path}
+ ws.on("open",function(){
+  http.get(op,function(rsp){
+   rsp.pipe(ws)
+  })
+ })
+ ws.on("close",function(){
+  callback();
+ })
+}
+
+// Normalization test
+
+function normalizationTest(){
 var codePoints=[]
 if(fs.existsSync("./cache/NormalizationTest.txt")){
  var file=fs.readFileSync("./cache/NormalizationTest.txt",'utf-8');
@@ -105,6 +127,7 @@ if(fs.existsSync("./cache/NormalizationTest.txt")){
      throw i.toString(16)+", NFKD,\n expected "+stringToCodeUnits(cps)+", got "+stringToCodeUnits(actual)
    }  
  }
+}
 }
 
 
@@ -231,7 +254,11 @@ function assertEqual(a, b){
       assertFalse(Idna.IsValidDomainName("\u062f\u0300\u0300\u200c\u0300\u0300\u062d",false));
     }
   
-  testAllAsciiLabels();
+
+try { fs.mkdirSync("cache") } catch(e){}
+fetchIfNeeded("cache/NormalizationTest.txt",
+"http://www.unicode.org/Public/UNIDATA/NormalizationTest.txt",normalizationTest)
+testAllAsciiLabels();
   idnaTest();
 
 })();
