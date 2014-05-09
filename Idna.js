@@ -311,6 +311,9 @@ function(str, form) {
         if(form==null || typeof form=="undefined"){
           form = Normalization.NFC;
         }
+        if(str.length<=1024 && Normalizer.IsNormalized(str, form)){
+          return str;
+        }
         var c = 0;
         if(str.length==1){
           c=str.charCodeAt(0);
