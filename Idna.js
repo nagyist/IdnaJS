@@ -80,7 +80,7 @@ Lz4.Decompress = function(input){
             ms.push(ms[pos+k])
         }
       }
-//      if(typeof Uint8Array!="undefined")ms=new Uint8Array(ms)
+      if(typeof Uint8Array!="undefined")ms=new Uint8Array(ms)
       return ms;
 }
 
