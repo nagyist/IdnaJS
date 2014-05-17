@@ -177,10 +177,13 @@ function assertEqual(a, b){
       assertTrue(Idna.IsValidDomainName("el\u00b7la",false));
       assertFalse(Idna.IsValidDomainName("-domain",false));
       assertFalse(Idna.IsValidDomainName("domain-",false));
+      assertFalse(Idna.IsValidDomainName("xn--",false));
+      assertFalse(Idna.IsValidDomainName("xn--.example",false));
+      assertFalse(Idna.IsValidDomainName("example.xn--",false));
       // Label starting with digit is valid since there are no RTL labels
       assertTrue(Idna.IsValidDomainName("1domain.example",false));
       // Label starting with digit is not valid since there are RTL labels
-      assertFalse(Idna.IsValidDomainName("1domain.\u05d0\u05d0",false));
+      assertFalse(Idna.IsValidDomainName("1domain.example.\u05d0\u05d0",false));
       assertFalse(Idna.IsValidDomainName("\u05d0\u05d0.1domain.example",false));
       assertFalse(Idna.IsValidDomainName("el\u00b7",false));
       assertFalse(Idna.IsValidDomainName("el\u00b7ma",false));
