@@ -426,7 +426,7 @@ function(str, form) {
         if(form==null || typeof form=="undefined"){
           form = Normalization.NFC;
         }
-        var lastNonStable = -1;
+        var nonStableStart = -1;
         var mask = (form == Normalization.NFC) ? 255 : 127;
         for (var i = 0; i < str.length; ++i) {
             var c = str.charCodeAt(i);
@@ -444,22 +444,22 @@ function(str, form) {
             } else {
                 isStable = Normalizer.IsStableCodePoint(c, form);
             }
-            if (lastNonStable < 0 && !isStable) {
+            if (nonStableStart < 0 && !isStable) {
 
-                lastNonStable = i;
-            } else if (lastNonStable >= 0 && isStable) {
+                nonStableStart = i;
+            } else if (nonStableStart >= 0 && isStable) {
 
-                if (!Normalizer.NormalizeAndCheckString(str, lastNonStable, i - lastNonStable, form)) {
+                if (!Normalizer.NormalizeAndCheckString(str, nonStableStart, i - nonStableStart, form)) {
                     return false;
                 }
-                lastNonStable = -1;
+                nonStableStart = -1;
             }
             if (c >= 65536) {
                 ++i;
             }
         }
-        if (lastNonStable >= 0) {
-            if (!Normalizer.NormalizeAndCheckString(str, lastNonStable, str.length - lastNonStable, form)) {
+        if (nonStableStart >= 0) {
+            if (!Normalizer.NormalizeAndCheckString(str, nonStableStart, str.length - nonStableStart, form)) {
                 return false;
             }
         }
