@@ -1463,15 +1463,15 @@ var Idna = function(){};
         (str.charAt(0) == 'n' || str.charAt(0) == 'N') && str.charCodeAt(2) == 0x2d && str.charCodeAt(3) == 0x2d) {
             maybeALabel = true;
         }
+        var allLDH = true;
         for (var i = 0; i < str.length; ++i) {
         // check for alphanumeric or hyphen
             if ((str.charCodeAt(i) >= 0x61 && str.charCodeAt(i) <= 0x7a) || 
                   (str.charCodeAt(i) >= 0x41 && str.charCodeAt(i) <= 0x5a) || 
                   (str.charCodeAt(i) >= 0x30 && str.charCodeAt(i) <= 0x39) || str.charCodeAt(i) == 0x2d) {
-
                 continue;
             } else if (str.charCodeAt(i) >= 128) {
-
+                allLDH = false;
                 continue;
             } else {
                 return false;
@@ -1492,8 +1492,16 @@ var Idna = function(){};
                 return false;
             }
 
-            return astr.equals(str);
+            return astr==str;
         } else {
+        if(allLDH){
+          if(str.charCodeAt(0)!=0x2d && str.charCodeAt(str.length-1)!=0x2d && 
+            !(str.charCodeAt(0)>=0x30 && str.charCodeAt(0)<=0x39)){
+            // Only LDH characters, doesn't start with hyphen or digit,
+            // and doesn't end with hyphen
+            return true;
+          }
+        }
             return Idna.IsValidULabel(str, lookupRules, bidiRule);
         }
     };
