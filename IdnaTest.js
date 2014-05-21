@@ -145,7 +145,7 @@ function assertEqual(a, b){
 
     // Tests that all-ASCII strings remain unchanged by
     // PunycodeEncode.
- function testAllAsciiLabels() {
+ function testPunycode() {
       var tmp;
       tmp="ascii";
       assertEqual(tmp, DomainUtility.PunycodeEncode(tmp));
@@ -171,6 +171,11 @@ function assertEqual(a, b){
       assertEqual(tmp, DomainUtility.PunycodeEncode(tmp));
       tmp="\u007fascii";
       assertEqual(tmp, DomainUtility.PunycodeEncode(tmp));
+      // Test other aspects of Punycode
+      assertEqual(
+        "xn--e-ufa",DomainUtility.PunycodeEncode("e\u00e1"));
+      assertEqual(
+        "e\u00e1",DomainUtility.PunycodeDecode("xn--e-ufa",4,9));
     }
 
    function idnaTest() {
@@ -265,7 +270,7 @@ function assertEqual(a, b){
 try { fs.mkdirSync("cache") } catch(e){}
 fetchIfNeeded("cache/NormalizationTest.txt",
 "http://www.unicode.org/Public/UNIDATA/NormalizationTest.txt",normalizationTest)
-testAllAsciiLabels();
+testPunycode();
   idnaTest();
 
 })();

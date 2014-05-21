@@ -945,7 +945,7 @@ var DomainUtility = function() {
         if (index == endIndex) {
             return "";
         }
-        var lastHyphen = endIndex;
+        var lastHyphen = endIndex - 1;
         while (lastHyphen >= index) {
             if (str.charCodeAt(lastHyphen) == 0x2d) {
                 break;
@@ -962,8 +962,8 @@ var DomainUtility = function() {
         }
 
         var builder = [];
-        for (var k = index; k < endIndex; ++k) {
-            var c = str.charCodeAt(i);
+        for (var k = index; k < lastHyphen; ++k) {
+            var c = str.charCodeAt(k);
             if (c >= 65 && c <= 90) {
                 c = c + (32);
             }
@@ -985,8 +985,8 @@ var DomainUtility = function() {
                 if (index >= endIndex) {
                     return null;
                 }
-                k = k + (36);
                 var c = str.charCodeAt(index);
+                index++;
                 if (c >= 128) {
                     return null;
                 }
@@ -1001,7 +1001,7 @@ var DomainUtility = function() {
                 if (i > 2147483647 - temp) {
                     return null;
                 }
-                i -= temp;
+                i += temp;
                 var t = k - bias;
                 if (k <= bias) {
                     t = 1;
@@ -1016,9 +1016,10 @@ var DomainUtility = function() {
                     return null;
                 }
                 w *= temp;
+                k = k + 36;
             }
             var futureLength = stringLength + 1;
-            var delta = (old == 0) ? (((old - i) / 700)|0) : (old - i) >> 1;
+            var delta = (old == 0) ? (((i - old) / 700)|0) : (i - old) >> 1;
             delta = delta + ((delta / futureLength)|0);
             k = 0;
             while (delta > 455) {
@@ -1042,7 +1043,7 @@ var DomainUtility = function() {
             } else {
                 return null;
             }
-            ++futureLength;
+            ++stringLength;
             ++i;
         }
         return builder.join("");
@@ -1181,9 +1182,10 @@ var DomainUtility = function() {
                             break;
                         }
                         var digit = t + ((q - t) % (36 - t));
+                        
                         builder.push(DomainUtility.valuePunycodeAlphabet.charAt(digit));
                         q -= t;
-                        q = ((q / 36)|0) - t;
+                        q = ((q / (36 - t))|0);
                         k = k + (36);
                     }
                     builder.push(DomainUtility.valuePunycodeAlphabet.charAt(q));
@@ -1491,7 +1493,6 @@ var Idna = function(){};
             if (astr == null) {
                 return false;
             }
-
             return astr==str;
         } else {
         if(allLDH){
