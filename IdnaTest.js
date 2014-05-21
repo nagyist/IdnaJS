@@ -177,6 +177,10 @@ function assertEqual(a, b){
       assertTrue(Idna.IsValidDomainName("el\u00b7la",false));
       assertFalse(Idna.IsValidDomainName("-domain",false));
       assertFalse(Idna.IsValidDomainName("domain-",false));
+      assertFalse(Idna.IsValidDomainName("ab--e-ufa",false));
+      assertFalse(Idna.IsValidDomainName("ab--e-ufa.example",false));
+      assertTrue(Idna.IsValidDomainName("xn--e-ufa",false));
+      assertTrue(Idna.IsValidDomainName("xn--e-ufa.example",false));
       assertFalse(Idna.IsValidDomainName("xn--",false));
       assertFalse(Idna.IsValidDomainName("xn--.example",false));
       assertFalse(Idna.IsValidDomainName("example.xn--",false));

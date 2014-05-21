@@ -1460,7 +1460,7 @@ var Idna = function(){};
         }
         var maybeALabel = false;
         if (str.length >= 4 && (str.charAt(0) == 'x' || str.charAt(0) == 'X') && 
-        (str.charAt(0) == 'n' || str.charAt(0) == 'N') && str.charCodeAt(2) == 0x2d && str.charCodeAt(3) == 0x2d) {
+        (str.charAt(1) == 'n' || str.charAt(1) == 'N') && str.charCodeAt(2) == 0x2d && str.charCodeAt(3) == 0x2d) {
             maybeALabel = true;
         }
         var allLDH = true;
@@ -1495,6 +1495,10 @@ var Idna = function(){};
             return astr==str;
         } else {
         if(allLDH){
+          // check "--" at second and third position
+          if (str.length >= 4 && str.charCodeAt(2) == 0x2d && str.charCodeAt(3) == 0x2d) {
+            return false;
+          }
           if(str.charCodeAt(0)!=0x2d && str.charCodeAt(str.length-1)!=0x2d && 
             !(str.charCodeAt(0)>=0x30 && str.charCodeAt(0)<=0x39)){
             // Only LDH characters, doesn't start with hyphen or digit,
