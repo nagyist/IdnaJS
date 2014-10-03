@@ -1,0 +1,27 @@
+{
+  "name": "idnajs",
+  "version": "1.0.0",
+  "author": {
+    "name": "Peter Occil <poccil14@gmail.com>"
+  },
+  "homepage": "https://github.com/peteroupc/IdnaJS",
+  "description": "A JavaScript implementation of IDNA 2008 and Unicode normalization",
+  "main": "Idna",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com/peteroupc/IdnaJS"
+  },
+  "directories": {
+    "lib": "."
+  },
+  "scripts": {
+    "test": "./IdnaTest.js"
+  },
+  "keywords": [
+    "idna",
+    "normalization"
+  ],
+  "bugs": {
+    "url": "https://github.com/peteroupc/IdnaJS/issues"
+  }
+}

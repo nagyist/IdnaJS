@@ -3,7 +3,17 @@ IdnaJS
 
 A JavaScript implementation of IDNA 2008 and Unicode normalization.
 
-The following functions are available:
+Installation
+----------
+
+     npm install peteroupc/IdnaJS
+
+Usage
+----------
+     
+     var idna=require("idnajs"),
+           Normalizer=idna.Normalizer,
+           Idna=idna.Idna;
 
 Normalizer.IsNormalized(string[, form])
 --------------
@@ -32,15 +42,3 @@ Checks whether a domain name is valid under IDNA 2008 (the second version
 of Internationalized Domain Names in Applications).  If `lookupRules` is true,
 uses somewhat more relaxed rules to be followed before looking up a domain
 name in the DNS; if `lookupRules` is omitted, the value `false` is assumed.
-
-
-
-
-
-
-
-
-
-
-
-
