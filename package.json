@@ -6,7 +6,7 @@
   },
   "homepage": "https://github.com/peteroupc/IdnaJS",
   "description": "A JavaScript implementation of IDNA 2008 and Unicode normalization",
-  "main": "Idna",
+  "main": "./Idna",
   "repository": {
     "type": "git",
     "url": "git@github.com/peteroupc/IdnaJS"
