@@ -10,7 +10,7 @@ Installation
 
 Usage
 ----------
-     
+
      var idna=require("idnajs"),
            Normalizer=idna.Normalizer,
            Idna=idna.Idna;

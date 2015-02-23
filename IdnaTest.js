@@ -44,7 +44,6 @@ function codePointsToString(codepoints){
  return builder.join("")
 }
 
-
 var fs=require("fs"), sys=require("sys")
 var http=require("http"), url=require("url")
 
@@ -125,11 +124,10 @@ if(fs.existsSync("./cache/NormalizationTest.txt")){
    actual=Normalizer.Normalize(cps,Normalization.NFKD);
    if(actual!=cps){
      throw i.toString(16)+", NFKD,\n expected "+stringToCodeUnits(cps)+", got "+stringToCodeUnits(actual)
-   }  
+   }
  }
 }
 }
-
 
 function assertTrue(cond){
   if(!cond)throw new Error("Expected true, got false");
@@ -265,7 +263,6 @@ function assertEqual(a, b){
       assertFalse(Idna.IsValidDomainName("\u062f\u200c\u062d",false));
       assertFalse(Idna.IsValidDomainName("\u062f\u0300\u0300\u200c\u0300\u0300\u062d",false));
     }
-  
 
 try { fs.mkdirSync("cache") } catch(e){}
 fetchIfNeeded("cache/NormalizationTest.txt",

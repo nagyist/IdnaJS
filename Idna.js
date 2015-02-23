@@ -137,7 +137,6 @@ var ByteData = function(array) {
     };
 })(ByteData,ByteData.prototype);
 
-
 var UnicodeDatabase = function() {
 
 };
@@ -1182,7 +1181,7 @@ var DomainUtility = function() {
                             break;
                         }
                         var digit = t + ((q - t) % (36 - t));
-                        
+
                         builder.push(DomainUtility.valuePunycodeAlphabet.charAt(digit));
                         q -= t;
                         q = ((q / (36 - t))|0);
@@ -1231,7 +1230,7 @@ var Idna = function(){};
     constructor['bidiClasses'] = constructor.bidiClasses = null;
     constructor.joiningTypes = null;
     constructor.scripts = null;
-    
+
     constructor.CodePointBefore = function(str, index) {
         if (str == null) {
             throw new Error("str");
@@ -1461,15 +1460,15 @@ var Idna = function(){};
             return false;
         }
         var maybeALabel = false;
-        if (str.length >= 4 && (str.charAt(0) == 'x' || str.charAt(0) == 'X') && 
+        if (str.length >= 4 && (str.charAt(0) == 'x' || str.charAt(0) == 'X') &&
         (str.charAt(1) == 'n' || str.charAt(1) == 'N') && str.charCodeAt(2) == 0x2d && str.charCodeAt(3) == 0x2d) {
             maybeALabel = true;
         }
         var allLDH = true;
         for (var i = 0; i < str.length; ++i) {
         // check for alphanumeric or hyphen
-            if ((str.charCodeAt(i) >= 0x61 && str.charCodeAt(i) <= 0x7a) || 
-                  (str.charCodeAt(i) >= 0x41 && str.charCodeAt(i) <= 0x5a) || 
+            if ((str.charCodeAt(i) >= 0x61 && str.charCodeAt(i) <= 0x7a) ||
+                  (str.charCodeAt(i) >= 0x41 && str.charCodeAt(i) <= 0x5a) ||
                   (str.charCodeAt(i) >= 0x30 && str.charCodeAt(i) <= 0x39) || str.charCodeAt(i) == 0x2d) {
                 continue;
             } else if (str.charCodeAt(i) >= 128) {
@@ -1500,7 +1499,7 @@ var Idna = function(){};
           if (str.length >= 4 && str.charCodeAt(2) == 0x2d && str.charCodeAt(3) == 0x2d) {
             return false;
           }
-          if(str.charCodeAt(0)!=0x2d && str.charCodeAt(str.length-1)!=0x2d && 
+          if(str.charCodeAt(0)!=0x2d && str.charCodeAt(str.length-1)!=0x2d &&
             !(str.charCodeAt(0)>=0x30 && str.charCodeAt(0)<=0x39)){
             // Only LDH characters, doesn't start with hyphen or digit,
             // and doesn't end with hyphen
