@@ -1,10 +1,16 @@
 IdnaJS
 =======
 
+If you like this software, consider donating to me at this link: [http://upokecenter.dreamhosters.com/articles/donate-now-2/](http://upokecenter.dreamhosters.com/articles/donate-now-2/)
+
+----
+
 A JavaScript implementation of IDNA 2008 and Unicode normalization.
 
 Installation
 ----------
+
+Run the following code, assuming you have `npm` installed:
 
      npm install peteroupc/IdnaJS
 
@@ -42,3 +48,15 @@ Checks whether a domain name is valid under IDNA 2008 (the second version
 of Internationalized Domain Names in Applications).  If `lookupRules` is true,
 uses somewhat more relaxed rules to be followed before looking up a domain
 name in the DNS; if `lookupRules` is omitted, the value `false` is assumed.
+
+
+Source Code
+---------
+Source code is available in the [project page](https://github.com/peteroupc/IdnaJS).
+
+About
+-----------
+
+Written by Peter O.
+
+See the [LICENSE](https://github.com/peteroupc/IdnaJS/blob/master/LICENSE.md) file for license information.
