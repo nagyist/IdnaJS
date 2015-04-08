@@ -49,7 +49,6 @@ of Internationalized Domain Names in Applications).  If `lookupRules` is true,
 uses somewhat more relaxed rules to be followed before looking up a domain
 name in the DNS; if `lookupRules` is omitted, the value `false` is assumed.
 
-
 Source Code
 ---------
 Source code is available in the [project page](https://github.com/peteroupc/IdnaJS).
