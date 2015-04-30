@@ -1,4 +1,3 @@
-
 /*
 Written in 2014 by Peter O.
 Any copyright is dedicated to the Public Domain.
