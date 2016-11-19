@@ -209,34 +209,33 @@ var UnicodeDatabase = function() {
         }
         UnicodeDatabase.decomps = NormalizationData.DecompMappings;
         var left = 0;
-        var right = UnicodeDatabase.decomps[0] - 1;
+        var right = (UnicodeDatabase.decomps.length >> 1) - 1;
         while (left <= right) {
             var index = (left + right) >> 1;
             var realIndex = 1 + (index << 1);
-            if (UnicodeDatabase.decomps[realIndex] == cp) {
-                var data = UnicodeDatabase.decomps[realIndex + 1];
+            if ((UnicodeDatabase.decomps[realIndex] & 2097151) == cp) {
+                var data = UnicodeDatabase.decomps[realIndex];
+                var data1 = UnicodeDatabase.decomps[realIndex + 1];
                 if ((data & (1 << 23)) > 0 && !compat) {
                     buffer[offset++] = cp;
                     return offset;
                 }
                 if ((data & (1 << 22)) > 0) {
 
-                    buffer[offset++] = data & 2097151;
+                    buffer[offset++] = data1;
                     return offset;
                 }
-                var size = data >> 24;
-                if (size > 0) {
-                    if ((data & (1 << 23)) > 0) {
-                        realIndex = data & 2097151;
-                        for (var arrfillI = 0; arrfillI < size; arrfillI++) buffer[offset + arrfillI] = NormalizationData.CompatDecompMappings[realIndex + arrfillI];
-                    } else {
-                        realIndex = 1 + (UnicodeDatabase.decomps[0] << 1) + (data & 2097151);
-                        for (var arrfillI = 0; arrfillI < size; arrfillI++) buffer[offset + arrfillI] = UnicodeDatabase.decomps[realIndex + arrfillI];
-                    }
-                    buffer[offset] = buffer[offset] & 2097151;
+                if ((data & (1 << 24)) > 0) {
+
+                    buffer[offset++] = (data1 & 0xffff);
+                    buffer[offset++] = ((data1>>16) & 0xffff);
+                    return offset;
                 }
+                var size = data1 >> 24;
+                        realIndex = data1 & 2097151;
+                        for (var arrfillI = 0; arrfillI < size; arrfillI++) buffer[offset + arrfillI] = NormalizationData.ComplexDecompMappings[realIndex + arrfillI];
                 return offset + size;
-            } else if (UnicodeDatabase.decomps[realIndex] < cp) {
+            } else if ((UnicodeDatabase.decomps[realIndex] & 2097151) < cp) {
                 left = index + 1;
             } else {
                 right = index - 1;
