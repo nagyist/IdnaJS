@@ -44,7 +44,7 @@ function codePointsToString(codepoints){
  return builder.join("")
 }
 
-var fs=require("fs"), sys=require("sys")
+var fs=require("fs")
 var http=require("http"), url=require("url")
 
 function fetchIfNeeded(local,remote,callback){
@@ -55,6 +55,7 @@ function fetchIfNeeded(local,remote,callback){
  var ws=fs.FileWriteStream(local)
  var urlinfo=url.parse(remote)
  var op={host:urlinfo.host,path:urlinfo.path}
+ console.log(op)
  ws.on("open",function(){
   http.get(op,function(rsp){
    rsp.pipe(ws)
@@ -71,6 +72,8 @@ function normalizationTest(){
 var codePoints=[]
 if(fs.existsSync("./cache/NormalizationTest.txt")){
  var file=fs.readFileSync("./cache/NormalizationTest.txt",'utf-8');
+ if(file.length==0)
+  throw new Error("Can't load normalization test")
  var lines=file.split(/\r?\n/g)
  var part1=false
  for(var i=0;i<lines.length;i++){
@@ -126,6 +129,8 @@ if(fs.existsSync("./cache/NormalizationTest.txt")){
      throw i.toString(16)+", NFKD,\n expected "+stringToCodeUnits(cps)+", got "+stringToCodeUnits(actual)
    }
  }
+} else {
+ throw new Error("Can't find normalization test")
 }
 }
 
@@ -264,10 +269,18 @@ function assertEqual(a, b){
       assertFalse(Idna.IsValidDomainName("\u062f\u0300\u0300\u200c\u0300\u0300\u062d",false));
     }
 
+    function otherNormTest(){
+      var s="_\ufac7\uc972+67 Tqd R_.";
+      var t="_\u96e3\uc972+67 Tqd R_.";
+      s=Normalizer.Normalize(s,Normalization.NFC);
+      assertEqual(s,t);
+    }
+
 try { fs.mkdirSync("cache") } catch(e){}
 fetchIfNeeded("cache/NormalizationTest.txt",
 "http://www.unicode.org/Public/UNIDATA/NormalizationTest.txt",normalizationTest)
 testPunycode();
   idnaTest();
+otherNormTest();
 
 })();
