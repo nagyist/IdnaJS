@@ -9,6 +9,7 @@
 *.suo
 *.userprefs
 .classpath
+.nuget/
 .pmd
 .project
 .settings/
@@ -26,3 +27,4 @@ coverage.xml
 js/*.ht*
 js/DecTest.*
 obj/
+packages/

@@ -1475,7 +1475,6 @@ function(stream, form) {
                 }
             }
         } while (total < length);
-        if (this.processedIndex != this.flushIndex) {}
         count = (0 > (this.processedIndex - this.flushIndex < length - total ? this.processedIndex - this.flushIndex : length - total) ? 0 : (this.processedIndex - this.flushIndex < length - total ? this.processedIndex - this.flushIndex : length - total));
         {
             var arrfillSrc = this.flushIndex, arrfillDst = index;
