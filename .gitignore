@@ -6,6 +6,7 @@
 *.log
 *.map
 *.shf*
+*.snk
 *.suo
 *.userprefs
 .classpath
@@ -25,6 +26,7 @@ bin/
 cache/
 coverage.xml
 encoding/
+encodingfldr/
 js/*.ht*
 js/DecTest.*
 obj/
