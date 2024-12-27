@@ -1,6 +1,7 @@
 *.Cache
 *.Settings
 *.bat
+*.cache
 *.class
 *.jar
 *.log
@@ -8,7 +9,6 @@
 *.nupkg
 *.pyc
 *.shf*
-*.snk
 *.suo
 *.userprefs
 .classpath

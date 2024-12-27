@@ -1172,7 +1172,7 @@ function(stream, form) {
         }
         var endPos = 0 + length;
         var composed = false;
-        for (var decompPos = 0; decompPos < endPos; ++decompPos) {
+        for (var decompPos = 1; decompPos < endPos; ++decompPos) {
             var ch = array[decompPos];
             var valuecc = UnicodeDatabase.GetCombiningClass(ch);
             if (decompPos > 0) {

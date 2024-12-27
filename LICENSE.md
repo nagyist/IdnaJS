@@ -1,6 +1,4 @@
-Written by Peter O. in 2013.  In the public domain.
-
-Public domain dedication: [http://creativecommons.org/publicdomain/zero/1.0/](http://creativecommons.org/publicdomain/zero/1.0/)
+Written by Peter O.  Any copyright to this work is released to the Public Domain.  In case this is not possible, this work is also licensed under the Unlicense: https://unlicense.org/
 
 There is one exception, shown below:
 

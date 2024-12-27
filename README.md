@@ -3,8 +3,6 @@ IdnaJS
 
 **Download source code: [ZIP file](https://github.com/peteroupc/IdnaJS/archive/master.zip)**
 
-If you like this software, consider donating to me at this link: [http://peteroupc.github.io/](http://peteroupc.github.io/)
-
 ----
 
 A JavaScript implementation of IDNA 2008 and Unicode normalization.
