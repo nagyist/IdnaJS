@@ -1,6 +1,6 @@
 Written by Peter O.  Any copyright to this work is released to the Public Domain.  In case this is not possible, this work is also licensed under the Unlicense: https://unlicense.org/
 
-There is one exception, shown below:
+There is one exception, shown next:
 
 --------------------------
 
@@ -10,7 +10,7 @@ NormalizationData.js
 IdnaData.js
 
 In accordance with the license found at <http://www.unicode.org/copyright.html> Exhibit 1, the
-copyright notice for the UCD is shown below.  Those files are available under that license.
+copyright notice for the UCD is shown next.  Those files are available under that license.
 
 -------------------------
 
